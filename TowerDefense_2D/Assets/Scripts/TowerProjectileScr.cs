@@ -24,7 +24,7 @@ public class TowerProjectileScr : MonoBehaviour
         {
             if (Vector2.Distance(transform.position, target.position) < 0.1f)
             {
-                target.GetComponent<Enemy>().TakeDamage(selfProjectile.damage);
+                target.GetComponent<EnemyScr>().TakeDamage(selfProjectile.damage);
                 Destroy(gameObject);
             }
             else

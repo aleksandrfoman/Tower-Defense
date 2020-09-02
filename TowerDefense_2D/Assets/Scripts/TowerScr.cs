@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class TowerScr : MonoBehaviour
@@ -10,58 +11,72 @@ public class TowerScr : MonoBehaviour
     public TowerType selfType;
     private GameController gm;
 
+    public Transform target;
+    private string enemyTag = "Enemy";
+
     private void Start()
     {
         gm = FindObjectOfType<GameController>();
         selfTower = gm.allTowers[(int) selfType];
         gameObject.GetComponent<SpriteRenderer>().color = selfTower.color;
+        InvokeRepeating("SearchTarget",0f, 0.5f);
     }
 
     private void Update()
     {
-        if (CanShoot())
+        if (target == null)
         {
-            SearchTarget();
+            return;
         }
-        if (selfTower.curCooldown > 0)
-        {
-            selfTower.curCooldown -= Time.deltaTime;
-        }
-    }
+        Vector2 dir = target.position - gameObject.transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        gameObject.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-    bool CanShoot()
-    {
-        if (selfTower.curCooldown <= 0)
+
+        if (selfTower.fireCountdown <= 0)
         {
-            return true;
+            Shoot(target);
+            //selfTower.fireCountdown = 1f / selfTower.fireRate;
         }
-        return false;
+
+        selfTower.fireCountdown -= Time.deltaTime;
     }
 
     void SearchTarget()
     {
-        Transform nearestEnemy = null;
-        float nearestEnemyDistance = Mathf.Infinity;
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
+        float shoreterstDistance = Mathf.Infinity;
+        GameObject nearestEnemy = null;
 
-        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+        foreach (var enemy in enemies)
         {
-            float curDist = Vector2.Distance(transform.position, enemy.transform.position);
-            if (curDist < nearestEnemyDistance && curDist <= selfTower.range)
+            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+            if (distanceToEnemy < shoreterstDistance)
             {
-                nearestEnemy = enemy.transform;
-                nearestEnemyDistance = curDist;
+                shoreterstDistance = distanceToEnemy;
+                nearestEnemy = enemy;
             }
         }
 
-        if (nearestEnemy != null)
+        if (nearestEnemy != null && shoreterstDistance <= selfTower.range)
         {
-            Shoot(nearestEnemy);
+            target = nearestEnemy.transform;
         }
+        else
+        {
+            target = null;
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position,selfTower.range);
     }
 
     void Shoot(Transform enemy)
     {
-        selfTower.curCooldown = selfTower.cooldown;
+        selfTower.fireCountdown = selfTower.fireRate;
         GameObject proj = Instantiate(projectile);
         proj.GetComponent<TowerProjectileScr>().selfProjectile = gm.allProjectile[(int) selfType];
         proj.transform.position = transform.position;

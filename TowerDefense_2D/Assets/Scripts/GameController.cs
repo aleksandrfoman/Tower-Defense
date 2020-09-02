@@ -3,20 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tower
+public struct Tower
 {
-    public float range, cooldown, curCooldown = 0f;
-    public GameObject projectile;
+    public float range, fireRate, fireCountdown;
     public Color color;
-    public Tower(float range, float curCooldwn,Color color)
+    public Tower(float range, float fr,Color color)
     {
         this.range = range;
-        cooldown = curCooldwn;
+        fireRate = fr;
         this.color = color;
+        fireCountdown = 0f;
     }
 }
 
-public class TowerProjectile
+public struct TowerProjectile
 {
     public float speed;
     public int damage;
@@ -44,8 +44,8 @@ public class GameController : MonoBehaviour
 
    private void Awake()
    {
-        allTowers.Add(new Tower(4,0.3f,Color.magenta));
-        allTowers.Add(new Tower(8,1,Color.yellow));
+        allTowers.Add(new Tower(2,0.2f,Color.magenta));
+        allTowers.Add(new Tower(4,1,Color.yellow));
 
         allProjectile.Add(new TowerProjectile(11,5,Color.magenta));
         allProjectile.Add(new TowerProjectile(20,40,Color.yellow));
