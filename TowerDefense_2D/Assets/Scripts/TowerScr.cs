@@ -50,7 +50,7 @@ public class TowerScr : MonoBehaviour
 
         foreach (var enemy in enemies)
         {
-            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+            float distanceToEnemy = Vector2.Distance(gameObject.transform.position, enemy.transform.position);
             if (distanceToEnemy < shoreterstDistance)
             {
                 shoreterstDistance = distanceToEnemy;
