@@ -2,14 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Enemy : MonoBehaviour
+public class EnemyScr : MonoBehaviour
 {
     List<GameObject> wayPoints = new List<GameObject>();
     private int wayIndex = 0;
     public float speed = 10f;
-    public int health = 30;
+    public float health = 100;
+    public float maxHealth = 100;
 
+    public Image HealthBar;
 
     private void Start()
     {
@@ -44,7 +47,9 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        HealthBar.fillAmount = health / maxHealth;
     }
+
 
     void CheckIsAlive()
     {
