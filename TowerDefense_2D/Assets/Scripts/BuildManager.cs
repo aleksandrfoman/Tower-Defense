@@ -19,16 +19,30 @@ public class BuildManager : MonoBehaviour
     public GameObject standardTowerPrefab;
     public GameObject anotherTowerPrefab;
 
-    private GameObject turretToBuild;
+    private TowerBlueprint towerToBuild;
 
-
-    public GameObject GetTowerToBuild()
+    public bool CanBuild
     {
-        return turretToBuild;
+        get { return towerToBuild != null; }
     }
 
-    public void SetTowerToBuild(GameObject tower)
+    public void BuildTowerOn(Node node)
     {
-        turretToBuild = tower;
+        if (PlayerStats.Money < towerToBuild.cost)
+        {
+            Debug.Log("Нет денег");
+        }
+        else
+        {
+            PlayerStats.Money -= towerToBuild.cost;
+            GameObject tower = (GameObject)Instantiate(towerToBuild.prefab, node.GetBuildPosition(), Quaternion.identity);
+            node.tower = tower;
+            Debug.Log(("Вышка построена , деньги: " + PlayerStats.Money));
+        }
+    }
+
+    public void SelectTowerToBuild(TowerBlueprint tower)
+    {
+        towerToBuild = tower;
     }
 }

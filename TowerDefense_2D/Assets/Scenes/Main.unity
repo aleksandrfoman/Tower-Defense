@@ -1004,6 +1004,7 @@ GameObject:
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
   - component: {fileID: 519420034}
+  - component: {fileID: 519420035}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1125,6 +1126,19 @@ MonoBehaviour:
   spawnPoint: {fileID: 7169831147936266040}
   timeBetweenWaves: 5
   waveTimerText: {fileID: 473733910}
+--- !u!114 &519420035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab0541bbad0f38f449c3e385252f6ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startMoney: 400
 --- !u!1001 &610222956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1618,6 +1632,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf4e2d5efda1184ab6961ec1bb04b6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stadnartTower:
+    prefab: {fileID: 7401380102571758898, guid: 6d2676d2da215f8479e1654866cc9060, type: 3}
+    cost: 100
+  antoherTower:
+    prefab: {fileID: 502680247924137003, guid: a4c3012ebf61e6e498298af696a42c06, type: 3}
+    cost: 200
 --- !u!1001 &784805262
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4091,7 +4111,7 @@ PrefabInstance:
       objectReference: {fileID: 769372038}
     - target: {fileID: 1198154635755480301, guid: a7a182ff38fc6c04ba206ae225a2173c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PurchaseAnotherTower
+      value: SelectAnotherTower
       objectReference: {fileID: 0}
     - target: {fileID: 1198154635755480303, guid: a7a182ff38fc6c04ba206ae225a2173c, type: 3}
       propertyPath: m_Name
@@ -4344,6 +4364,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 769372038}
+    - target: {fileID: 6805825929248901978, guid: 2c553f15f5857ea40b1f5427a8fdedbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectStandardTower
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c553f15f5857ea40b1f5427a8fdedbf, type: 3}
 --- !u!4 &7169831147936266040 stripped

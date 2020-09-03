@@ -9,7 +9,10 @@ public class Node : MonoBehaviour
     public Color hoverColor;
     public Color baseColor;
 
-    private GameObject turret;
+    public Vector3 positionOffset;
+
+    [Header("Optional")]
+    public GameObject tower;
     private SpriteRenderer sprRender;
 
     private BuildManager buildManager;
@@ -30,27 +33,30 @@ public class Node : MonoBehaviour
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
-        if (buildManager.GetTowerToBuild()==null)
+        if (!buildManager.CanBuild)
             return;
 
-        if (turret != null)
+        if (tower != null)
         {
             Debug.Log("Нельзя строить");
             return;;
         }
         else
         {
-            GameObject turretToBuild = BuildManager.instance.GetTowerToBuild();
-            turret = (GameObject) Instantiate(turretToBuild, transform.position, transform.rotation);
-           // turret.transform.SetParent(gameObject.transform);
+            buildManager.BuildTowerOn(this);
         }
+    }
+
+    public Vector3 GetBuildPosition()
+    {
+        return transform.position+positionOffset;
     }
 
     private void OnMouseEnter()
     {
         if(EventSystem.current.IsPointerOverGameObject())
             return;
-        if (buildManager.GetTowerToBuild() == null)
+        if (!buildManager.CanBuild)
             return;
 
         sprRender.color = hoverColor;

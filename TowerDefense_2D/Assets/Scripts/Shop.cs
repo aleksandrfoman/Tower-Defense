@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
+    public TowerBlueprint stadnartTower;
+    public TowerBlueprint antoherTower;
     private BuildManager buildManager;
 
     private void Start()
@@ -12,14 +14,14 @@ public class Shop : MonoBehaviour
         buildManager = BuildManager.instance;
     }
 
-    public void PurchaseStandardTower()
+    public void SelectStandardTower()
     {
-         buildManager.SetTowerToBuild(buildManager.standardTowerPrefab);
+        buildManager.SelectTowerToBuild(stadnartTower);
     }
 
-    public void PurchaseAnotherTower()
+    public void SelectAnotherTower()
     {
-        buildManager.SetTowerToBuild(buildManager.anotherTowerPrefab);
+        buildManager.SelectTowerToBuild(antoherTower);
     }
 
 }
