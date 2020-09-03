@@ -14,6 +14,11 @@ public class Node : MonoBehaviour
 
     [Header("Optional")]
     public GameObject tower;
+
+    public TowerBlueprint towerBlueprint;
+
+    public bool isUpgraded = false;
+
     private SpriteRenderer sprRender;
 
     private BuildManager buildManager;
@@ -38,20 +43,52 @@ public class Node : MonoBehaviour
             buildManager.SelecetNode(this);
             return;;
         }
-        else
-        {
-            buildManager.BuildTowerOn(this);
-        }
         if (!buildManager.CanBuild)
             return;
 
+        BuildTower(buildManager.GetTowerToBuild());
+    }
 
-
+    void BuildTower(TowerBlueprint blueprint)
+    {
+        if (PlayerStats.Money < blueprint.cost)
+        {
+            Debug.Log("Нет денег");
+        }
+        else
+        {
+            PlayerStats.Money -= blueprint.cost;
+            GameObject _tower = (GameObject)Instantiate(blueprint.prefab, GetBuildPosition(), Quaternion.identity);
+            towerBlueprint = blueprint;
+            tower = _tower;
+            Debug.Log("Постройка башни");
+        }
     }
 
     public Vector3 GetBuildPosition()
     {
         return transform.position+positionOffset;
+    }
+
+    public void UpgradeTower()
+    {
+        if (PlayerStats.Money < towerBlueprint.upgradeCost)
+        {
+            Debug.Log("Нет денег на ап");
+        }
+        else
+        {
+            PlayerStats.Money -= towerBlueprint.upgradeCost;
+
+            Destroy(tower);
+            //Построить новую башню
+
+            GameObject _tower = (GameObject)Instantiate(towerBlueprint.upgradePrefab, GetBuildPosition(), Quaternion.identity);
+
+            tower = _tower;
+            isUpgraded = true;
+            Debug.Log("Апргейд успешен");
+        }
     }
 
     private void OnMouseEnter()

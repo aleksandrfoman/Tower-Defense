@@ -1755,7 +1755,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 723948717}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1186416009}
+        m_TargetAssemblyTypeName: NodeUI, Assembly-CSharp
+        m_MethodName: Upgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &723948717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2173,9 +2185,13 @@ MonoBehaviour:
   stadnartTower:
     prefab: {fileID: 7401380102571758898, guid: 6d2676d2da215f8479e1654866cc9060, type: 3}
     cost: 100
+    upgradePrefab: {fileID: 502680247924137003, guid: a4c3012ebf61e6e498298af696a42c06, type: 3}
+    upgradeCost: 100
   antoherTower:
     prefab: {fileID: 502680247924137003, guid: a4c3012ebf61e6e498298af696a42c06, type: 3}
     cost: 200
+    upgradePrefab: {fileID: 7401380102571758898, guid: 6d2676d2da215f8479e1654866cc9060, type: 3}
+    upgradeCost: 50
 --- !u!1001 &784805262
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3045,6 +3061,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 29588753}
+  upgrButton: {fileID: 723948716}
+  upgradeCost: {fileID: 1048402085}
 --- !u!1 &1204176132
 GameObject:
   m_ObjectHideFlags: 0

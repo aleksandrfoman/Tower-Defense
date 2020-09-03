@@ -31,21 +31,6 @@ public class BuildManager : MonoBehaviour
         get { return PlayerStats.Money>=towerToBuild.cost; }
     }
 
-    public void BuildTowerOn(Node node)
-    {
-        if (PlayerStats.Money < towerToBuild.cost)
-        {
-            Debug.Log("Нет денег");
-        }
-        else
-        {
-            PlayerStats.Money -= towerToBuild.cost;
-            GameObject tower = (GameObject)Instantiate(towerToBuild.prefab, node.GetBuildPosition(), Quaternion.identity);
-            node.tower = tower;
-            Debug.Log(("Вышка построена , деньги: " + PlayerStats.Money));
-        }
-    }
-
     public void SelecetNode(Node node)
     {
         if (selectedNode == node)
@@ -69,5 +54,10 @@ public class BuildManager : MonoBehaviour
     {
         towerToBuild = tower;
         DeselectNode();
+    }
+
+    public TowerBlueprint GetTowerToBuild()
+    {
+        return towerToBuild;
     }
 }
