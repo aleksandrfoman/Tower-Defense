@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Node : MonoBehaviour
 {
@@ -11,14 +12,27 @@ public class Node : MonoBehaviour
     private GameObject turret;
     private SpriteRenderer sprRender;
 
+    private BuildManager buildManager;
+
     private void Awake()
     {
         sprRender = GetComponent<SpriteRenderer>();
         sprRender.color = baseColor;
     }
 
+    private void Start()
+    {
+        buildManager = BuildManager.instance;
+    }
+
     private void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
+        if (buildManager.GetTowerToBuild()==null)
+            return;
+
         if (turret != null)
         {
             Debug.Log("Нельзя строить");
@@ -26,7 +40,7 @@ public class Node : MonoBehaviour
         }
         else
         {
-            GameObject turretToBuild = BuildManager.instance.GetTuuretToBuild();
+            GameObject turretToBuild = BuildManager.instance.GetTowerToBuild();
             turret = (GameObject) Instantiate(turretToBuild, transform.position, transform.rotation);
            // turret.transform.SetParent(gameObject.transform);
         }
@@ -34,11 +48,16 @@ public class Node : MonoBehaviour
 
     private void OnMouseEnter()
     {
-       sprRender.color = hoverColor;
+        if(EventSystem.current.IsPointerOverGameObject())
+            return;
+        if (buildManager.GetTowerToBuild() == null)
+            return;
+
+        sprRender.color = hoverColor;
     }
 
     private void OnMouseExit()
     {
-       sprRender.color = baseColor;
+        sprRender.color = baseColor;
     }
 }

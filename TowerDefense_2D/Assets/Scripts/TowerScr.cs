@@ -19,7 +19,7 @@ public class TowerScr : MonoBehaviour
         gm = FindObjectOfType<GameController>();
         selfTower = gm.allTowers[(int) selfType];
         gameObject.GetComponent<SpriteRenderer>().color = selfTower.color;
-        InvokeRepeating("SearchTarget",0f, 0.5f);
+        InvokeRepeating("SearchTarget",0f, 0.1f);
     }
 
     private void Update()
