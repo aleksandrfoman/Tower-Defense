@@ -20,10 +20,15 @@ public class BuildManager : MonoBehaviour
     public GameObject anotherTowerPrefab;
 
     private TowerBlueprint towerToBuild;
-
+    private Node selectedNode;
+    public NodeUI nodeUI;
     public bool CanBuild
     {
         get { return towerToBuild != null; }
+    }
+    public bool HasMoney
+    {
+        get { return PlayerStats.Money>=towerToBuild.cost; }
     }
 
     public void BuildTowerOn(Node node)
@@ -41,8 +46,28 @@ public class BuildManager : MonoBehaviour
         }
     }
 
+    public void SelecetNode(Node node)
+    {
+        if (selectedNode == node)
+        {
+            DeselectNode();
+            return;
+        }
+        selectedNode = node;
+        towerToBuild = null;
+
+        nodeUI.SetTarget(node);
+    }
+
+    public void DeselectNode()
+    {
+        selectedNode = null;
+        nodeUI.Hide();
+    }
+
     public void SelectTowerToBuild(TowerBlueprint tower)
     {
         towerToBuild = tower;
+        DeselectNode();
     }
 }

@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class Node : MonoBehaviour
 {
     public Color hoverColor;
+    public Color notMoneyColor;
     public Color baseColor;
 
     public Vector3 positionOffset;
@@ -32,19 +33,20 @@ public class Node : MonoBehaviour
     {
         if (EventSystem.current.IsPointerOverGameObject())
             return;
-
-        if (!buildManager.CanBuild)
-            return;
-
         if (tower != null)
         {
-            Debug.Log("Нельзя строить");
+            buildManager.SelecetNode(this);
             return;;
         }
         else
         {
             buildManager.BuildTowerOn(this);
         }
+        if (!buildManager.CanBuild)
+            return;
+
+
+
     }
 
     public Vector3 GetBuildPosition()
@@ -58,8 +60,14 @@ public class Node : MonoBehaviour
             return;
         if (!buildManager.CanBuild)
             return;
-
-        sprRender.color = hoverColor;
+        if (buildManager.HasMoney)
+        {
+            sprRender.color = hoverColor;
+        }
+        else
+        {
+            sprRender.color = notMoneyColor;
+        }
     }
 
     private void OnMouseExit()

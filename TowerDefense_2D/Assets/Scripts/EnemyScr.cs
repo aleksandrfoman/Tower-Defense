@@ -11,6 +11,7 @@ public class EnemyScr : MonoBehaviour
     public float speed = 10f;
     public float health = 100;
     public float maxHealth = 100;
+    public int valueMoney = 50;
 
     public Image HealthBar;
 
@@ -39,7 +40,7 @@ public class EnemyScr : MonoBehaviour
             }
             else
             {
-                Destroy(gameObject);
+                EndPath();
             }
         }
     }
@@ -55,7 +56,14 @@ public class EnemyScr : MonoBehaviour
     {
         if (health <= 0)
         {
+            PlayerStats.Money += valueMoney;
             Destroy(gameObject);
         }
+    }
+
+    void EndPath()
+    {
+        PlayerStats.Lives--;
+        Destroy(gameObject);
     }
 }

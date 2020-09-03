@@ -35,6 +35,7 @@ public class TowerProjectileScr : MonoBehaviour
         }
         else
         {
+
             Destroy(gameObject);
         }
     }

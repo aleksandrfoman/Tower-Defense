@@ -123,4 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverColor: {r: 0.79001623, g: 0.3890174, b: 0.8867924, a: 1}
+  notMoneyColor: {r: 1, g: 0.023584902, b: 0.023584902, a: 1}
   baseColor: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
+  positionOffset: {x: 0, y: 0, z: 0}
+  tower: {fileID: 0}
