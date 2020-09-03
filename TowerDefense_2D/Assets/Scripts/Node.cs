@@ -81,7 +81,7 @@ public class Node : MonoBehaviour
             PlayerStats.Money -= towerBlueprint.upgradeCost;
 
             Destroy(tower);
-            //Построить новую башню
+            //Эффект
 
             GameObject _tower = (GameObject)Instantiate(towerBlueprint.upgradePrefab, GetBuildPosition(), Quaternion.identity);
 
@@ -89,6 +89,16 @@ public class Node : MonoBehaviour
             isUpgraded = true;
             Debug.Log("Апргейд успешен");
         }
+    }
+
+    public void SellTower()
+    {
+        PlayerStats.Money += towerBlueprint.GetSellAmount();
+
+        //Заспавнить эффект
+        Destroy(tower);
+        isUpgraded = false;
+        towerBlueprint = null;
     }
 
     private void OnMouseEnter()

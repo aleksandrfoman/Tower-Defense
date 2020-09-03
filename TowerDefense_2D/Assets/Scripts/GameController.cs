@@ -44,7 +44,7 @@ public class GameController : MonoBehaviour
 
    private void Awake()
    {
-        allTowers.Add(new Tower(2,0.2f,Color.magenta));
+        allTowers.Add(new Tower(10,0.05f,Color.magenta));
         allTowers.Add(new Tower(4,1,Color.yellow));
 
         allProjectile.Add(new TowerProjectile(11,5,Color.magenta));

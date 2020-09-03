@@ -515,4 +515,5 @@ MonoBehaviour:
   speed: 5
   health: 30
   maxHealth: 30
+  valueMoney: 50
   HealthBar: {fileID: 875294009}

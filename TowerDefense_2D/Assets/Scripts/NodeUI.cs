@@ -8,8 +8,9 @@ public class NodeUI : MonoBehaviour
     public GameObject ui;
     private Node target;
     public Button upgrButton;
-
     public Text upgradeCost;
+
+    public Text sellAmount;
     public void SetTarget(Node _target)
     {
         this.target = _target;
@@ -25,7 +26,16 @@ public class NodeUI : MonoBehaviour
             upgrButton.interactable = false;
 
         }
+
+        sellAmount.text = "$ " + target.towerBlueprint.GetSellAmount();
+
         ui.SetActive(true);
+    }
+
+    public void Sell()
+    {
+        target.SellTower();
+        BuildManager.instance.DeselectNode();
     }
 
     public void Hide()
