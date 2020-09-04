@@ -1767,13 +1767,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - enemy: {fileID: 8362235035952741018, guid: 669e805ddb93bf04dbf6db749bd8c750, type: 3}
-    count: 3
-    rate: 1
+    count: 15
+    rate: 4
   - enemy: {fileID: 3663433773735957523, guid: 966aaf59c3ddcd945b18b606667df661, type: 3}
-    count: 2
+    count: 20
     rate: 4
   - enemy: {fileID: 2482047526982264683, guid: 9820d7756a868f845ac3d9e6bee65e84, type: 3}
-    count: 4
+    count: 10
     rate: 4
   spawnPoint: {fileID: 7169831147936266040}
   timeBetweenWaves: 0
