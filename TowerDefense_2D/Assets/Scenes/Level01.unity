@@ -1765,10 +1765,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6bd0f2ff520d46419f7536248fce524, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 8362235035952741028, guid: 669e805ddb93bf04dbf6db749bd8c750, type: 3}
+  waves:
+  - enemy: {fileID: 8362235035952741018, guid: 669e805ddb93bf04dbf6db749bd8c750, type: 3}
+    count: 3
+    rate: 1
+  - enemy: {fileID: 3663433773735957523, guid: 966aaf59c3ddcd945b18b606667df661, type: 3}
+    count: 2
+    rate: 4
+  - enemy: {fileID: 2482047526982264683, guid: 9820d7756a868f845ac3d9e6bee65e84, type: 3}
+    count: 4
+    rate: 4
   spawnPoint: {fileID: 7169831147936266040}
-  timeBetweenWaves: 5
+  timeBetweenWaves: 0
   waveTimerText: {fileID: 473733910}
+  gameManager: {fileID: 519420036}
 --- !u!114 &519420035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1782,7 +1792,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startMoney: 400
-  startLives: 1
+  startLives: 20
 --- !u!114 &519420036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1796,6 +1806,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverUI: {fileID: 1028146778}
+  nextLevel: Level02
+  levelToUnlock: 2
 --- !u!114 &519420037
 MonoBehaviour:
   m_ObjectHideFlags: 0

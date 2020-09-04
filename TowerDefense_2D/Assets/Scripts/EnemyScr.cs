@@ -10,13 +10,14 @@ public class EnemyScr : MonoBehaviour
     private int wayIndex = 0;
     public float speed = 10f;
     public float health = 100;
-    public float maxHealth = 100;
+    private float maxHealth = 100;
     public int valueMoney = 50;
 
     public Image HealthBar;
 
     private void Start()
     {
+        maxHealth = health;
         wayPoints = GameObject.Find("Main Camera").GetComponent<GameController>().wayPoints;
     }
 
@@ -56,14 +57,18 @@ public class EnemyScr : MonoBehaviour
     {
         if (health <= 0)
         {
+
             PlayerStats.Money += valueMoney;
             Destroy(gameObject);
+
+            WaveSpawner.EnemiesAlive--;
         }
     }
 
     void EndPath()
     {
         PlayerStats.Lives--;
+        WaveSpawner.EnemiesAlive--;
         Destroy(gameObject);
     }
 }
