@@ -7,12 +7,6 @@ using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour
 {
-    public Text roundsText;
-
-    private void OnEnable()
-    {
-        roundsText.text = PlayerStats.Rounds.ToString();
-    }
 
     public void Retry()
     {
@@ -24,4 +18,6 @@ public class GameOver : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
         Debug.Log("GoToMenu");
     }
+
+
 }

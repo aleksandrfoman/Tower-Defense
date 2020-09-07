@@ -16,11 +16,18 @@ public class WaveSpawner : MonoBehaviour
 
     private float countdown = 2f;
 
-    private int waveIndex = 0;
+
+    private int waveIndex;
+    public int startWaveIndex = 0;
 
     public Text waveTimerText;
 
     public GameManager gameManager;
+
+    private void Start()
+    {
+        waveIndex = startWaveIndex;
+    }
 
     private void Update()
     {
@@ -28,6 +35,12 @@ public class WaveSpawner : MonoBehaviour
         {
             return;
         }
+        if (waveIndex == waves.Length)
+        {
+            gameManager.WinLevel();
+            this.enabled = false;
+        }
+
         if (countdown <= 0f)
         {
             StartCoroutine(SpawnWave());
@@ -44,6 +57,7 @@ public class WaveSpawner : MonoBehaviour
     {
 
         PlayerStats.Rounds++;
+
         Wave wave = waves[waveIndex];
 
         EnemiesAlive = wave.count;
@@ -54,12 +68,6 @@ public class WaveSpawner : MonoBehaviour
             yield return  new WaitForSeconds(1f/wave.rate);
         }
 
-        waveIndex++;
-        if (waveIndex == waves.Length)
-        {
-            //gameManager.WinLevel();
-            this.enabled = false;
-        }
     }
 
     void SpawnEnemy(GameObject enemy)

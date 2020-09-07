@@ -6,11 +6,19 @@ using UnityEngine;
 public class TowerProjectileScr : MonoBehaviour
 {
     private Transform target;
-    public TowerProjectile selfProjectile;
+    public Color color;
+    public int damage;
+    public float speed;
+
+    public float explosionRadius = 0f;
+
+
+   // public GameObject imactEffect;
+
 
     private void Start()
     {
-        GetComponent<SpriteRenderer>().color = selfProjectile.color;
+        GetComponent<SpriteRenderer>().color = color;
     }
 
     private void Update()
@@ -20,28 +28,59 @@ public class TowerProjectileScr : MonoBehaviour
 
     private void Move()
     {
-        if (target != null)
+        if (target == null)
         {
-            if (Vector2.Distance(transform.position, target.position) < 0.1f)
-            {
-                target.GetComponent<EnemyScr>().TakeDamage(selfProjectile.damage);
-                Destroy(gameObject);
-            }
-            else
-            {
-                Vector2 dir = target.position - transform.position;
-                transform.Translate(dir.normalized * Time.deltaTime * selfProjectile.speed);
-            }
+            Destroy(gameObject);
+            return;
+        }
+
+        Vector3 dir = target.position - transform.position;
+        float distanceThisFrame = speed * Time.deltaTime;
+        if (dir.magnitude <= distanceThisFrame)
+        {
+            HitTarget();
+            return;
+        }
+        transform.Translate(dir.normalized*distanceThisFrame);
+        //transform.LookAt(target);
+
+    }
+
+    void HitTarget()
+    {
+        //GameObject effectIns = Instantiate(imactEffect, transform.position, transform.rotation);
+        if (explosionRadius > 0f)
+        {
+            Explode();
         }
         else
         {
-
-            Destroy(gameObject);
+            Damage(target);
         }
-    }
 
+        Destroy(gameObject);
+    }
     public void SetTarget(Transform enemy)
     {
         target = enemy;
+    }
+
+    void Explode()
+    {
+        Debug.Log("Explode");
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position,explosionRadius);
+
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.tag == "Enemy")
+            {
+                Debug.Log(collider);
+                Damage(collider.transform);
+            }
+        }
+    }
+    void Damage(Transform enemy)
+    {
+        Destroy(enemy.gameObject);
     }
 }

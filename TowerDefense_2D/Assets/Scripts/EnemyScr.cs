@@ -6,19 +6,20 @@ using UnityEngine.UI;
 
 public class EnemyScr : MonoBehaviour
 {
-    List<GameObject> wayPoints = new List<GameObject>();
-    private int wayIndex = 0;
     public float speed = 10f;
     public float health = 100;
     private float maxHealth = 100;
     public int valueMoney = 50;
-
     public Image HealthBar;
+
+
+    private Transform target;
+    private int wavepointIndex = 0;
 
     private void Start()
     {
+        target = Waypoints.points[0];
         maxHealth = health;
-        wayPoints = GameObject.Find("Main Camera").GetComponent<GameController>().wayPoints;
     }
 
     private void Update()
@@ -29,21 +30,24 @@ public class EnemyScr : MonoBehaviour
 
     private void Move()
     {
-        Vector3 dir = wayPoints[wayIndex].transform.position - transform.position;
+        Vector3 dir = target.position - transform.position;
+        transform.Translate(dir.normalized * speed * Time.deltaTime);
 
-        transform.Translate(dir.normalized*Time.deltaTime*speed);
-
-        if (Vector3.Distance(transform.position, wayPoints[wayIndex].transform.position) < 0.1f)
+        if (Vector3.Distance(transform.position, target.position) <= 0.2f)
         {
-            if (wayIndex < wayPoints.Count - 1)
-            {
-                wayIndex++;
-            }
-            else
-            {
-                EndPath();
-            }
+            GetNextWaypoint();
         }
+    }
+
+    void GetNextWaypoint()
+    {
+        if (wavepointIndex >= Waypoints.points.Length - 1)
+        {
+            EndPath();
+            return;
+        }
+        wavepointIndex++;
+        target = Waypoints.points[wavepointIndex];
     }
 
     public void TakeDamage(int damage)

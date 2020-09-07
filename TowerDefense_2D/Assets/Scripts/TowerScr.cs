@@ -7,18 +7,15 @@ using UnityEngine;
 public class TowerScr : MonoBehaviour
 {
     public GameObject projectile;
-    private Tower selfTower;
-    public TowerType selfType;
-    private GameController gm;
-
+    private float fireCountdown = 0f;
+    public float range;
+    public float fireRate;
+    public Transform shootPoint;
     public Transform target;
     private string enemyTag = "Enemy";
 
     private void Start()
     {
-        gm = FindObjectOfType<GameController>();
-        selfTower = gm.allTowers[(int) selfType];
-        gameObject.GetComponent<SpriteRenderer>().color = selfTower.color;
         InvokeRepeating("SearchTarget",0f, 0.1f);
     }
 
@@ -33,13 +30,13 @@ public class TowerScr : MonoBehaviour
         gameObject.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
 
-        if (selfTower.fireCountdown <= 0)
+        if (fireCountdown <= 0)
         {
             Shoot(target);
-            //selfTower.fireCountdown = 1f / selfTower.fireRate;
+           // fireCountdown = 1f / fireRate;
         }
 
-        selfTower.fireCountdown -= Time.deltaTime;
+        fireCountdown -= Time.deltaTime;
     }
 
     void SearchTarget()
@@ -58,7 +55,7 @@ public class TowerScr : MonoBehaviour
             }
         }
 
-        if (nearestEnemy != null && shoreterstDistance <= selfTower.range)
+        if (nearestEnemy != null && shoreterstDistance <= range)
         {
             target = nearestEnemy.transform;
         }
@@ -71,15 +68,15 @@ public class TowerScr : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position,selfTower.range);
+        Gizmos.DrawWireSphere(transform.position,range);
     }
 
     void Shoot(Transform enemy)
     {
-        selfTower.fireCountdown = selfTower.fireRate;
+        fireCountdown = fireRate;
         GameObject proj = Instantiate(projectile);
-        proj.GetComponent<TowerProjectileScr>().selfProjectile = gm.allProjectile[(int) selfType];
-        proj.transform.position = transform.position;
+       // proj.GetComponent<TowerProjectileScr>().selfProjectile = gm.allProjectile[(int) selfType];
+        proj.transform.position = shootPoint.transform.position;
         proj.GetComponent<TowerProjectileScr>().SetTarget(enemy);
     }
 }
