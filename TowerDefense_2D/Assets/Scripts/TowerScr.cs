@@ -14,6 +14,14 @@ public class TowerScr : MonoBehaviour
     public Transform target;
     private string enemyTag = "Enemy";
 
+    [Header("Use Laser")]
+    public bool useLaser = false;
+
+    public int damageOverTime = 30;
+    public LineRenderer lineRenderer;
+
+
+
     private void Start()
     {
         InvokeRepeating("SearchTarget",0f, 0.1f);
@@ -23,22 +31,52 @@ public class TowerScr : MonoBehaviour
     {
         if (target == null)
         {
+            if (useLaser)
+            {
+                if (lineRenderer.enabled)
+                    lineRenderer.enabled = false;
+            }
+
             return;
         }
+
+        LockOnTarget();
+
+        if (useLaser)
+        {
+            Laser();
+        }
+        else
+        {
+            if (fireCountdown <= 0)
+            {
+                Shoot(target);
+                // fireCountdown = 1f / fireRate;
+            }
+
+            fireCountdown -= Time.deltaTime;
+        }
+    }
+
+    void Laser()
+    {
+        target.GetComponent<EnemyScr>().TakeDamage(damageOverTime*Time.deltaTime);
+        if (!lineRenderer.enabled)
+        {
+            lineRenderer.enabled = true;
+            //Частицы
+        }
+        lineRenderer.SetPosition(0,shootPoint.position);
+        lineRenderer.SetPosition(1,target.position);
+    }
+
+    void LockOnTarget()
+    {
         Vector2 dir = target.position - gameObject.transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         gameObject.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-
-        if (fireCountdown <= 0)
-        {
-            Shoot(target);
-           // fireCountdown = 1f / fireRate;
-        }
-
-        fireCountdown -= Time.deltaTime;
     }
-
     void SearchTarget()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);

@@ -67,20 +67,18 @@ public class TowerProjectileScr : MonoBehaviour
 
     void Explode()
     {
-        Debug.Log("Explode");
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position,explosionRadius);
 
         foreach (Collider2D collider in colliders)
         {
             if (collider.tag == "Enemy")
             {
-                Debug.Log(collider);
                 Damage(collider.transform);
             }
         }
     }
     void Damage(Transform enemy)
     {
-        Destroy(enemy.gameObject);
+        enemy.GetComponent<EnemyScr>().TakeDamage(damage);
     }
 }

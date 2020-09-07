@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3663433773735957549}
   - component: {fileID: 3663433773735957522}
+  - component: {fileID: -1378222118924556796}
   - component: {fileID: 1433550240038008315}
   - component: {fileID: 4112146700775872695}
   m_Layer: 0
@@ -87,6 +88,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-1378222118924556796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3663433773735957523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4041a7d184fdb784c8a1a7ec85cbfd15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
 --- !u!114 &1433550240038008315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,7 +113,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f8574120847573429f7be5b9e837874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
   health: 30
   valueMoney: 50
   HealthBar: {fileID: 5105817463901209520}

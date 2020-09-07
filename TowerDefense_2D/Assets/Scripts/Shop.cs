@@ -2,26 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
-    public TowerBlueprint stadnartTower;
-    public TowerBlueprint antoherTower;
     private BuildManager buildManager;
+    public TowerBlueprint[] towers;
 
     private void Start()
     {
         buildManager = BuildManager.instance;
     }
 
-    public void SelectStandardTower()
+    public void SelectTower(int i)
     {
-        buildManager.SelectTowerToBuild(stadnartTower);
-    }
-
-    public void SelectAnotherTower()
-    {
-        buildManager.SelectTowerToBuild(antoherTower);
+        buildManager.SelectTowerToBuild(towers[i]);
     }
 
 }
