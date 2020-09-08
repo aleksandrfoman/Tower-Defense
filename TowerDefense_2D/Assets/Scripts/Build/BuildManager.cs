@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BuildManager : MonoBehaviour
 {
+    //Сингелтон для строительства
     public static BuildManager instance;
 
     private void Awake()

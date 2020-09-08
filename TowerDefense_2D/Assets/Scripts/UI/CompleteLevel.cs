@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class CompleteLevel : MonoBehaviour
 {
 
-    public string nextLevel = "Level02";
-    public int levelToUnlock = 2;
+    public string nextLevel = "Level02"; //Имя некст сцены
+    public int levelToUnlock = 2; //Лвл который анлокнится
 
     public void Continue()
     {

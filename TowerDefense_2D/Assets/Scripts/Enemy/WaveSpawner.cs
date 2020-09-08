@@ -6,21 +6,21 @@ using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour
 {
-    public static int EnemiesAlive = 0;
+    public static int EnemiesAlive = 0; //Сколько врагов живо
 
-    public Wave[] waves;
+    public Wave[] waves; //Волны
 
-    public Transform spawnPoint;
+    public Transform spawnPoint; //Точка спавна
 
-    public float timeBetweenWaves = 5f;
+    public float timeBetweenWaves = 5f; //Время перед волной
 
-    private float countdown = 2f;
+    private float countdown = 2f; //Время между волнами
 
 
-    private int waveIndex;
-    public int startWaveIndex = 0;
+    private int waveIndex; //Индекс волны
+    public int startWaveIndex = 0; //Начальный индекс волны
 
-    public Text waveTimerText;
+    public Text waveTimerText; //Текст для времени перед волной
 
     public GameManager gameManager;
 

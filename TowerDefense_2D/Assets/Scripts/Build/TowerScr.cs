@@ -1,26 +1,20 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TowerScr : MonoBehaviour
 {
-    public GameObject projectile;
-    private float fireCountdown = 0f;
-    public float range;
-    public float fireRate;
-    public Transform shootPoint;
-    public Transform target;
-    private string enemyTag = "Enemy";
+    [Header("Use default")]
+    public GameObject projectile; //Снаряд для вышки
+    private float fireCountdown = 0f; //Переменная для перезарядки
+    public float range; //Дальность вышки
+    public float fireRate; //Частотать стрельбы
+    public Transform shootPoint; //точка спавна снаряда
+    public Transform target; //таргет врага
+    private string enemyTag = "Enemy"; //Тег врага
 
-    [Header("Use Laser")]
+    [Header("Use Laser")] //если вышка лазерная
     public bool useLaser = false;
-
     public int damageOverTime = 30;
     public LineRenderer lineRenderer;
-
-
 
     private void Start()
     {
@@ -113,7 +107,6 @@ public class TowerScr : MonoBehaviour
     {
         fireCountdown = fireRate;
         GameObject proj = Instantiate(projectile);
-       // proj.GetComponent<TowerProjectileScr>().selfProjectile = gm.allProjectile[(int) selfType];
         proj.transform.position = shootPoint.transform.position;
         proj.GetComponent<TowerProjectileScr>().SetTarget(enemy);
     }

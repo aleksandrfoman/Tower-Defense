@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-
+﻿using UnityEngine;
 public class GameManager : MonoBehaviour
 {
-    private bool gameIsOver;
-
-    public GameObject gameOverUI;
-    public GameObject completeLevelUI;
+    private bool gameIsOver; //Конец игры
+    public GameObject gameOverUI; //Канвас поражения
+    public GameObject completeLevelUI; //Канвас победы
 
     private void Start()
     {

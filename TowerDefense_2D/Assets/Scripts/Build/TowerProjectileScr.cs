@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TowerProjectileScr : MonoBehaviour
 {
-    private Transform target;
-    public Color color;
-    public int damage;
-    public float speed;
+    private Transform target; //Таргет врага
+    public Color color; //Цвет снаряда
+    public int damage; //Урон снаряда
+    public float speed;//Скорость снаряда
+    public float explosionRadius = 0f; //Если больше 0, снаряд становиться взрывным и наносит в радиусе урон соседним врагам
 
-    public float explosionRadius = 0f;
-
-
-   // public GameObject imactEffect;
+    // public GameObject imactEffect; Эффект для попадания
 
 
     private void Start()
@@ -42,8 +37,7 @@ public class TowerProjectileScr : MonoBehaviour
             return;
         }
         transform.Translate(dir.normalized*distanceThisFrame);
-        //transform.LookAt(target);
-
+        transform.LookAt(target);
     }
 
     void HitTarget()

@@ -1,25 +1,22 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Node : MonoBehaviour
 {
-    public Color hoverColor;
-    public Color notMoneyColor;
-    public Color baseColor;
+    public Color hoverColor; //Цвет при наводке
+    public Color notMoneyColor; //Цвет когда нету денег при наводке
+    public Color baseColor; //Начальный цвет
 
-    public Vector3 positionOffset;
+    public Vector3 positionOffset; //Оффест для строительства
 
     [Header("Optional")]
-    public GameObject tower;
+    public GameObject tower; //Вышка на платформе
 
-    public TowerBlueprint towerBlueprint;
+    public TowerBlueprint towerBlueprint; //Чертеж вышки
 
-    public bool isUpgraded = false;
+    public bool isUpgraded = false; //Апнута ли вышка
 
-    private SpriteRenderer sprRender;
+    private SpriteRenderer sprRender; //Спрайт нода
 
     private BuildManager buildManager;
 

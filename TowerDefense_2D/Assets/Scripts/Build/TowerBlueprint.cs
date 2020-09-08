@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class TowerBlueprint
 {
-    public GameObject prefab;
-    public int cost;
-    public GameObject upgradePrefab;
-    public int upgradeCost;
+    public GameObject prefab; //Префаб вышки
+    public int cost; //Стоимость вышки
+    public GameObject upgradePrefab; //Префаб для апгрейда вышки
+    public int upgradeCost; //Стоимость апгрейда
 
     public int GetSellAmount()
     {

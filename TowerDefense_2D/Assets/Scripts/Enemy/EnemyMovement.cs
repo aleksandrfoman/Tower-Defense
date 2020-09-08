@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public float speed = 5f;
-    private Transform target;
+    public float speed = 5f; //Скорость врага
+    private Transform target; //Таргет вейпоинта
     private int wavepointIndex = 0;
     private EnemyScr enemyScr;
 

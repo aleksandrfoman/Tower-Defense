@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class Wave
 {
-    public GameObject enemy;
-    public int count;
-    public float rate;
+    public GameObject enemy; //Префаб врага
+    public int count; //Количество врагов
+    public float rate; //Задержка между выходом врагов
 
 }
