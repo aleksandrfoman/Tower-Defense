@@ -96,5 +96,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 1, g: 0, b: 0, a: 1}
-  damage: 5
+  damage: 3
   speed: 20
+  explosionRadius: 0
+  slowPotion: 1
+  durationSlow: 2
+  slowValue: 4
+  impactEffect: {fileID: 3387603515178699198, guid: 65e56e2510dea2641bd349d1e8ab04f9, type: 3}

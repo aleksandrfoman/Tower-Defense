@@ -1,19 +1,16 @@
 ﻿using UnityEngine;
 public class GameManager : MonoBehaviour
 {
-    private bool gameIsOver; //Конец игры
     public GameObject gameOverUI; //Канвас поражения
     public GameObject completeLevelUI; //Канвас победы
 
-    private void Start()
-    {
-        gameIsOver = false;
-    }
-
     private void Update()
     {
-        if (gameIsOver)
+        if (PlayerStats.isGameOver)
+        {
             return;
+        }
+
         if (PlayerStats.Lives <= 0)
         {
             EndGame();
@@ -22,13 +19,13 @@ public class GameManager : MonoBehaviour
 
     void EndGame()
     {
-        gameIsOver = true;
+        PlayerStats.isGameOver = true;
         gameOverUI.SetActive(true);
     }
 
     public void WinLevel()
     {
-        gameIsOver = true;
+        PlayerStats.isGameOver = true;
         completeLevelUI.SetActive(true);
     }
 }

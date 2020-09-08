@@ -54,5 +54,6 @@ public class BuildManager : MonoBehaviour
     public TowerBlueprint GetTowerToBuild()
     {
         return towerToBuild;
+
     }
 }

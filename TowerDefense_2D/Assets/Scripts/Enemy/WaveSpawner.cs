@@ -12,7 +12,7 @@ public class WaveSpawner : MonoBehaviour
 
     public Transform spawnPoint; //Точка спавна
 
-    public float timeBetweenWaves = 5f; //Время перед волной
+    public float timeBetweenWaves = 5f; //Время между волной
 
     private float countdown = 2f; //Время между волнами
 
@@ -26,6 +26,7 @@ public class WaveSpawner : MonoBehaviour
 
     private void Start()
     {
+        EnemiesAlive = 0;
         waveIndex = startWaveIndex;
     }
 

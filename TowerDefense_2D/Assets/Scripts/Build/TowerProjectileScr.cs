@@ -7,13 +7,18 @@ public class TowerProjectileScr : MonoBehaviour
     public int damage; //Урон снаряда
     public float speed;//Скорость снаряда
     public float explosionRadius = 0f; //Если больше 0, снаряд становиться взрывным и наносит в радиусе урон соседним врагам
+    public bool slowPotion = false;//Замедлят?
+    public float durationSlow = 2f;//Длительность замедления
+    public float slowValue = 4f;//Замедление
 
-    // public GameObject imactEffect; Эффект для попадания
+    public GameObject impactEffect; //Эффект для попадания
 
+    private EnemyScr enemy;
 
     private void Start()
     {
         GetComponent<SpriteRenderer>().color = color;
+        enemy = target.GetComponent<EnemyScr>();
     }
 
     private void Update()
@@ -37,12 +42,14 @@ public class TowerProjectileScr : MonoBehaviour
             return;
         }
         transform.Translate(dir.normalized*distanceThisFrame);
-        transform.LookAt(target);
     }
 
     void HitTarget()
     {
-        //GameObject effectIns = Instantiate(imactEffect, transform.position, transform.rotation);
+        if (impactEffect != null)
+        {
+            GameObject effectIns = Instantiate(impactEffect, transform.position, transform.rotation);
+        }
         if (explosionRadius > 0f)
         {
             Explode();
@@ -50,6 +57,10 @@ public class TowerProjectileScr : MonoBehaviour
         else
         {
             Damage(target);
+            if (slowPotion)
+            {
+                enemy.StartSlow(durationSlow,slowValue);
+            }
         }
 
         Destroy(gameObject);

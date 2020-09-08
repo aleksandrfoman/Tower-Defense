@@ -2,8 +2,7 @@
 
 public class EnemyMovement : MonoBehaviour
 {
-    public float speed = 5f; //Скорость врага
-    private Transform target; //Таргет вейпоинта
+  private Transform target; //Таргет вейпоинта
     private int wavepointIndex = 0;
     private EnemyScr enemyScr;
 
@@ -21,7 +20,7 @@ public class EnemyMovement : MonoBehaviour
     private void Move()
     {
         Vector3 dir = target.position - transform.position;
-        transform.Translate(dir.normalized * speed * Time.deltaTime);
+        transform.Translate(dir.normalized * enemyScr.speed * Time.deltaTime);
 
         if (Vector3.Distance(transform.position, target.position) <= 0.2f)
         {

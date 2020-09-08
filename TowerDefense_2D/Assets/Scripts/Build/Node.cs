@@ -1,5 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Runtime.InteropServices.WindowsRuntime;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Node : MonoBehaviour
 {
@@ -17,6 +20,10 @@ public class Node : MonoBehaviour
     public bool isUpgraded = false; //Апнута ли вышка
 
     private SpriteRenderer sprRender; //Спрайт нода
+    public GameObject impactEffect; //Эффект для build
+
+    public Text[] notificationTexts; //NotificationO
+
 
     private BuildManager buildManager;
 
@@ -50,7 +57,8 @@ public class Node : MonoBehaviour
     {
         if (PlayerStats.Money < blueprint.cost)
         {
-            Debug.Log("Нет денег");
+            Debug.Log("NO MONEY");
+            //Узнать как правильно сделать оповещение
         }
         else
         {
@@ -58,7 +66,8 @@ public class Node : MonoBehaviour
             GameObject _tower = (GameObject)Instantiate(blueprint.prefab, GetBuildPosition(), Quaternion.identity);
             towerBlueprint = blueprint;
             tower = _tower;
-            Debug.Log("Постройка башни");
+            Instantiate(impactEffect, transform.position, transform.rotation);
+
         }
     }
 

@@ -15,6 +15,7 @@ public class TowerScr : MonoBehaviour
     public bool useLaser = false;
     public int damageOverTime = 30;
     public LineRenderer lineRenderer;
+    public ParticleSystem impactEffect;
 
     private void Start()
     {
@@ -28,7 +29,10 @@ public class TowerScr : MonoBehaviour
             if (useLaser)
             {
                 if (lineRenderer.enabled)
+                {
                     lineRenderer.enabled = false;
+                   // impactEffect.Stop();
+                }
             }
 
             return;
@@ -58,10 +62,17 @@ public class TowerScr : MonoBehaviour
         if (!lineRenderer.enabled)
         {
             lineRenderer.enabled = true;
+            //impactEffect.Play();
             //Частицы
         }
         lineRenderer.SetPosition(0,shootPoint.position);
         lineRenderer.SetPosition(1,target.position);
+
+        /*
+        Vector3 dir = shootPoint.position - target.position;
+        impactEffect.transform.position = target.transform.position+dir.normalized*.5f;
+        impactEffect.transform.rotation = Quaternion.LookRotation(dir);
+        */
     }
 
     void LockOnTarget()

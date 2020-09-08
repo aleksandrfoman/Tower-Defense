@@ -100,7 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4041a7d184fdb784c8a1a7ec85cbfd15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
 --- !u!114 &1433550240038008315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,6 +115,8 @@ MonoBehaviour:
   health: 30
   valueMoney: 50
   HealthBar: {fileID: 5105817463901209520}
+  speed: 0
+  startSpeed: 5
 --- !u!58 &4112146700775872695
 CircleCollider2D:
   m_ObjectHideFlags: 0
