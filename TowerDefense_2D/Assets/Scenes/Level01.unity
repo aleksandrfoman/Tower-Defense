@@ -5141,7 +5141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 935119653645394282, guid: 2c553f15f5857ea40b1f5427a8fdedbf, type: 3}
       propertyPath: m_Text
-      value: "\u041B\u0443\u0447(\u043B\u0430\u0437\u0435\u0440)"
+      value: Ray
       objectReference: {fileID: 0}
     - target: {fileID: 935119653645394282, guid: 2c553f15f5857ea40b1f5427a8fdedbf, type: 3}
       propertyPath: m_FontData.m_FontSize
@@ -5454,7 +5454,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 935119653645394282, guid: 2c553f15f5857ea40b1f5427a8fdedbf, type: 3}
       propertyPath: m_Text
-      value: "\u0411\u044B\u0441\u0442\u0440\u0430\u044F"
+      value: Fast
       objectReference: {fileID: 0}
     - target: {fileID: 935119653645394282, guid: 2c553f15f5857ea40b1f5427a8fdedbf, type: 3}
       propertyPath: m_FontData.m_FontSize
@@ -8093,7 +8093,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 935119653645394282, guid: 2c553f15f5857ea40b1f5427a8fdedbf, type: 3}
       propertyPath: m_Text
-      value: "\u0421\u043F\u043B\u044D\u0448\u0421\u0438\u043B\u044C\u043D\u0430\u044F"
+      value: Splash
       objectReference: {fileID: 0}
     - target: {fileID: 935119653645394282, guid: 2c553f15f5857ea40b1f5427a8fdedbf, type: 3}
       propertyPath: m_FontData.m_FontSize
@@ -8406,7 +8406,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 935119653645394282, guid: 2c553f15f5857ea40b1f5427a8fdedbf, type: 3}
       propertyPath: m_Text
-      value: "\u042F\u0434\u043E\u0432\u0438\u0442\u0430\u044F\n"
+      value: POISON
       objectReference: {fileID: 0}
     - target: {fileID: 935119653645394282, guid: 2c553f15f5857ea40b1f5427a8fdedbf, type: 3}
       propertyPath: m_FontData.m_FontSize
