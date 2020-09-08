@@ -16,9 +16,6 @@ public class BuildManager : MonoBehaviour
         instance = this;
     }
 
-    public GameObject standardTowerPrefab;
-    public GameObject anotherTowerPrefab;
-
     private TowerBlueprint towerToBuild;
     private Node selectedNode;
     public NodeUI nodeUI;

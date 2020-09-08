@@ -41,7 +41,7 @@ public class Node : MonoBehaviour
         if (tower != null)
         {
             buildManager.SelecetNode(this);
-            return;;
+            return;
         }
         if (!buildManager.CanBuild)
             return;

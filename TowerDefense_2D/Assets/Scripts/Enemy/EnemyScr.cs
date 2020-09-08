@@ -11,7 +11,6 @@ public class EnemyScr : MonoBehaviour
     public int valueMoney = 50;
     public Image HealthBar;
 
-
     private void Start()
     {
         maxHealth = health;
