@@ -14,15 +14,13 @@ public class WaveSpawner : MonoBehaviour
 
     public float timeBetweenWaves = 5f; //Время между волной
 
-    private float countdown = 2f; //Время между волнами
+    public float countdown = 2f; //Время между волнами
 
 
     private int waveIndex; //Индекс волны
     public int startWaveIndex = 0; //Начальный индекс волны
 
-    public Text waveTimerText; //Текст для времени перед волной
-
-    public GameManager gameManager;
+    //public GameManager gameManager;
 
     private void Start()
     {
@@ -38,7 +36,7 @@ public class WaveSpawner : MonoBehaviour
         }
         if (waveIndex == waves.Length)
         {
-            gameManager.WinLevel();
+           // gameManager.WinLevel(false);
             this.enabled = false;
         }
         else if (countdown <= 0f)
@@ -49,8 +47,6 @@ public class WaveSpawner : MonoBehaviour
         }
 
         countdown -= Time.deltaTime;
-        countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
-        waveTimerText.text = string.Format("{0:00.00}", countdown);
     }
 
     IEnumerator SpawnWave()
