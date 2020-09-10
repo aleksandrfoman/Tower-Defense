@@ -20,10 +20,11 @@ public class WaveSpawner : MonoBehaviour
     private int waveIndex; //Индекс волны
     public int startWaveIndex = 0; //Начальный индекс волны
 
-    //public GameManager gameManager;
+    private GameMenuScript gms;
 
     private void Start()
     {
+        gms = FindObjectOfType<GameMenuScript>();
         EnemiesAlive = 0;
         waveIndex = startWaveIndex;
     }
@@ -36,7 +37,7 @@ public class WaveSpawner : MonoBehaviour
         }
         if (waveIndex == waves.Length)
         {
-           // gameManager.WinLevel(false);
+            gms.CheckGame(true);
             this.enabled = false;
         }
         else if (countdown <= 0f)

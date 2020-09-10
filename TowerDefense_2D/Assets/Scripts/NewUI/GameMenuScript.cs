@@ -29,10 +29,6 @@ public class GameMenuScript : MonoBehaviour
     public PauseMenuScript pms;
     private Button _pauseButton;
 
-    public GameObject gameOverUI; //Канвас поражения
-    public GameObject completeLevelUI; //Канвас победы
-
-
     private void Awake()
     {
 
@@ -42,14 +38,13 @@ public class GameMenuScript : MonoBehaviour
          _pauseButton = GameObject.Find("PauseButton").GetComponent<Button>();
          _gameOverMenu = GameObject.Find("GameOver/WinGame").GetComponentInChildren<GameOverWinScript>();
          _gameOverMenu.gameObject.SetActive(false);
+
     }
 
     private void Pause()
     {
         pms.Toggle();
     }
-
-
 
     private void Start()
     {
@@ -82,7 +77,7 @@ public class GameMenuScript : MonoBehaviour
 
         if (PlayerStats.Lives <= 0)
         {
-            EndGame(true);
+            CheckGame(false);
         }
     }
 
@@ -125,9 +120,8 @@ public class GameMenuScript : MonoBehaviour
         _buildManager.SelectTowerToBuild(_towersList[value]);
     }
 
-    void EndGame(bool gameWin)
+    public void CheckGame(bool value)
     {
-        PlayerStats.isGameOver = true;
-        gameOverUI.SetActive(true);
+        _gameOverMenu.EndGame(value);
     }
 }
