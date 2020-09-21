@@ -77,7 +77,7 @@ public class GameMenuScript : MonoBehaviour
 
         if (PlayerStats.Lives <= 0)
         {
-            CheckGame(false);
+            CheckGame(true);
         }
     }
 

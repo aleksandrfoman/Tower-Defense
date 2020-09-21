@@ -7,20 +7,20 @@ using UnityEngine.UI;
 
 public class PauseMenuScript : MonoBehaviour
 {
-    public Button refreshButton;
-    public Button menuButton;
-    public Button continueButton;
+    private Button _refreshButton;
+    private Button _menuButton;
+    private Button _continueButton;
 
     private void Start()
     {
 
-        continueButton = GameObject.Find("ContinuePause").GetComponent<Button>();
-        refreshButton = GameObject.Find("RetryPause").GetComponent<Button>();
-        menuButton = GameObject.Find("MenuPause").GetComponent<Button>();
+        _continueButton = GameObject.Find("ContinuePause").GetComponent<Button>();
+        _refreshButton = GameObject.Find("RetryPause").GetComponent<Button>();
+        _menuButton = GameObject.Find("MenuPause").GetComponent<Button>();
 
-        continueButton.onClick.AddListener(Toggle);
-        menuButton.onClick.AddListener(Menu);
-        refreshButton.onClick.AddListener(Retry);
+        _continueButton.onClick.AddListener(Toggle);
+        _menuButton.onClick.AddListener(Menu);
+        _refreshButton.onClick.AddListener(Retry);
 
     }
 
@@ -28,13 +28,11 @@ public class PauseMenuScript : MonoBehaviour
     {
         if (!gameObject.activeSelf)
         {
-            Debug.Log("Active");
             gameObject.SetActive(true);
             Time.timeScale = 0f;
         }
         else
         {
-            Debug.Log("Disactive");
             gameObject.SetActive(false);
             Time.timeScale = 1f;
         }
