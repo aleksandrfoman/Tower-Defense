@@ -808,7 +808,6 @@ GameObject:
   - component: {fileID: 216886705}
   - component: {fileID: 216886704}
   - component: {fileID: 216886703}
-  - component: {fileID: 216886706}
   m_Layer: 5
   m_Name: Rounds
   m_TagString: Untagged
@@ -892,19 +891,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 216886701}
   m_CullTransparentMesh: 0
---- !u!114 &216886706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216886701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eeb3d39d03355741a0b09eec9b91514, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roundsText: {fileID: 216886704}
 --- !u!1001 &221930629
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2735,19 +2721,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 786896410}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
-        m_MethodName: Menu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &786896410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3665,8 +3639,6 @@ MonoBehaviour:
   _pauseMenu: {fileID: 0}
   _gameOverMenu: {fileID: 0}
   pms: {fileID: 0}
-  gameOverUI: {fileID: 0}
-  completeLevelUI: {fileID: 0}
 --- !u!1 &1028146778
 GameObject:
   m_ObjectHideFlags: 0
@@ -3723,6 +3695,7 @@ MonoBehaviour:
   retryButton: {fileID: 0}
   menuButton: {fileID: 0}
   gameOverText: {fileID: 0}
+  roundsText: {fileID: 0}
 --- !u!1001 &1040103425
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6211,19 +6184,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1725254728}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
-        m_MethodName: Retry
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1725254728
 MonoBehaviour:
   m_ObjectHideFlags: 0

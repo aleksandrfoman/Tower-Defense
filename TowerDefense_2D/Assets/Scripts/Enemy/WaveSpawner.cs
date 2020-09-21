@@ -37,7 +37,7 @@ public class WaveSpawner : MonoBehaviour
         }
         if (waveIndex == waves.Length)
         {
-            gms.CheckGame(true);
+            gms.CheckGame(false);
             this.enabled = false;
         }
         else if (countdown <= 0f)
