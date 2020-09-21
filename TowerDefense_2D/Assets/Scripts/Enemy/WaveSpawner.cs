@@ -6,53 +6,58 @@ using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour
 {
-    public static int EnemiesAlive = 0; //Сколько врагов живо
+    public static int EnemiesAlive = 0;
 
-    public Wave[] waves; //Волны
+    public Wave[] waves;
 
-    public Transform spawnPoint; //Точка спавна
+    public Transform spawnPoint;
 
-    public float timeBetweenWaves = 5f; //Время между волной
+    public float timeBetweenWaves = 5f;
 
-    public float countdown = 2f; //Время между волнами
+    public float countdown = 2f;
 
 
-    private int waveIndex; //Индекс волны
-    public int startWaveIndex = 0; //Начальный индекс волны
+    private int _waveIndex;
+    public int startWaveIndex = 0;
 
-    private GameMenuScript gms;
+    private GameMenuScript _gms;
 
     private void Start()
     {
-        gms = FindObjectOfType<GameMenuScript>();
+        _gms = FindObjectOfType<GameMenuScript>();
         EnemiesAlive = 0;
-        waveIndex = startWaveIndex;
+        _waveIndex = startWaveIndex;
+        PlayerStats.isGameOver = false;
     }
 
     private void Update()
     {
-        if (EnemiesAlive > 0)
+        if (!PlayerStats.isGameOver)
         {
-            return;
-        }
-        if (waveIndex == waves.Length)
-        {
-            gms.CheckGame(false);
-            this.enabled = false;
-        }
-        else if (countdown <= 0f)
-        {
-            StartCoroutine(SpawnWave());
-            countdown = timeBetweenWaves;
-            //return;
+            if (EnemiesAlive > 0)
+            {
+                return;
+            }
+            if (_waveIndex == waves.Length)
+            {
+                _gms.CheckGame(false);
+                this.enabled = false;
+            }
+            else if (countdown <= 0f)
+            {
+                StartCoroutine(SpawnWave());
+                countdown = timeBetweenWaves;
+                //return;
+            }
+
+            countdown -= Time.deltaTime;
         }
 
-        countdown -= Time.deltaTime;
     }
 
     IEnumerator SpawnWave()
     {
-        Wave wave = waves[waveIndex];
+        Wave wave = waves[_waveIndex];
         EnemiesAlive = wave.count;
         PlayerStats.Rounds++;
 
@@ -61,7 +66,7 @@ public class WaveSpawner : MonoBehaviour
             SpawnEnemy(wave.enemy);
             yield return  new WaitForSeconds(wave.rate);
         }
-        waveIndex++;
+        _waveIndex++;
     }
 
     void SpawnEnemy(GameObject enemy)

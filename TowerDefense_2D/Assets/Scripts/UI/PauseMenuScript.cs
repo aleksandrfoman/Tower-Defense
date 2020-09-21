@@ -10,18 +10,17 @@ public class PauseMenuScript : MonoBehaviour
     private Button _refreshButton;
     private Button _menuButton;
     private Button _continueButton;
-
-    private void Start()
+    public GameObject _pauseMenu;
+    public void Init()
     {
-
-        _continueButton = GameObject.Find("ContinuePause").GetComponent<Button>();
-        _refreshButton = GameObject.Find("RetryPause").GetComponent<Button>();
-        _menuButton = GameObject.Find("MenuPause").GetComponent<Button>();
-
+        _pauseMenu = GameObject.Find("UIPauseMenu");
+        _continueButton = _pauseMenu.transform.Find("ContinuePause").GetComponent<Button>();
+        _refreshButton = _pauseMenu.transform.Find("RetryPause").GetComponent<Button>();
+        _menuButton = _pauseMenu.transform.Find("MenuPause").GetComponent<Button>();
         _continueButton.onClick.AddListener(Toggle);
         _menuButton.onClick.AddListener(Menu);
         _refreshButton.onClick.AddListener(Retry);
-
+        _pauseMenu.SetActive(false);
     }
 
     public void Toggle()

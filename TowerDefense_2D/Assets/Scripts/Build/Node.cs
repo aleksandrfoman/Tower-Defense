@@ -6,21 +6,21 @@ using UnityEngine.UI;
 
 public class Node : MonoBehaviour
 {
-    public Color hoverColor; //Цвет при наводке
-    public Color notMoneyColor; //Цвет когда нету денег при наводке
-    public Color baseColor; //Начальный цвет
+    public Color hoverColor;
+    public Color notMoneyColor;
+    public Color baseColor;
 
-    public Vector3 positionOffset; //Оффест для строительства
+    public Vector3 positionOffset;
 
     [Header("Optional")]
-    public GameObject tower; //Вышка на платформе
+    public GameObject tower;
 
-    public TowerBlueprint towerBlueprint; //Чертеж вышки
+    public TowerBlueprint towerBlueprint;
 
-    public bool isUpgraded = false; //Апнута ли вышка
+    public bool isUpgraded = false;
 
-    private SpriteRenderer sprRender; //Спрайт нода
-    public GameObject impactEffect; //Эффект для build
+    private SpriteRenderer _sprRender; //Sprite Node
+    public GameObject impactEffect; //Effects for build
 
     public Text[] notificationTexts; //NotificationO
 
@@ -29,8 +29,8 @@ public class Node : MonoBehaviour
 
     private void Awake()
     {
-        sprRender = GetComponent<SpriteRenderer>();
-        sprRender.color = baseColor;
+        _sprRender = GetComponent<SpriteRenderer>();
+        _sprRender.color = baseColor;
     }
 
     private void Start()
@@ -58,7 +58,6 @@ public class Node : MonoBehaviour
         if (PlayerStats.Money < blueprint.cost)
         {
             Debug.Log("NO MONEY");
-            //Узнать как правильно сделать оповещение
         }
         else
         {
@@ -80,28 +79,25 @@ public class Node : MonoBehaviour
     {
         if (PlayerStats.Money < towerBlueprint.upgradeCost)
         {
-            Debug.Log("Нет денег на ап");
+            Debug.Log("No money to upgrade");
         }
         else
         {
             PlayerStats.Money -= towerBlueprint.upgradeCost;
 
             Destroy(tower);
-            //Эффект
 
             GameObject _tower = (GameObject)Instantiate(towerBlueprint.upgradePrefab, GetBuildPosition(), Quaternion.identity);
 
             tower = _tower;
             isUpgraded = true;
-            Debug.Log("Апргейд успешен");
+            Debug.Log("Upgrade done");
         }
     }
 
     public void SellTower()
     {
         PlayerStats.Money += towerBlueprint.GetSellAmount();
-
-        //Заспавнить эффект
         Destroy(tower);
         isUpgraded = false;
         towerBlueprint = null;
@@ -115,16 +111,16 @@ public class Node : MonoBehaviour
             return;
         if (buildManager.HasMoney)
         {
-            sprRender.color = hoverColor;
+            _sprRender.color = hoverColor;
         }
         else
         {
-            sprRender.color = notMoneyColor;
+            _sprRender.color = notMoneyColor;
         }
     }
 
     private void OnMouseExit()
     {
-        sprRender.color = baseColor;
+        _sprRender.color = baseColor;
     }
 }

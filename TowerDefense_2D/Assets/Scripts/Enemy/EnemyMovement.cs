@@ -2,14 +2,14 @@
 
 public class EnemyMovement : MonoBehaviour
 {
-  private Transform target; //Таргет вейпоинта
-    private int wavepointIndex = 0;
-    private EnemyScr enemyScr;
+    private Transform _target; //Waypoint target
+    private int _wavepointIndex = 0;
+    private EnemyScr _enemyScr;
 
     private void Start()
     {
-        target = Waypoints.points[0];
-        enemyScr = GetComponent<EnemyScr>();
+        _target = Waypoints.points[0];
+        _enemyScr = GetComponent<EnemyScr>();
     }
 
     private void Update()
@@ -19,10 +19,10 @@ public class EnemyMovement : MonoBehaviour
 
     private void Move()
     {
-        Vector3 dir = target.position - transform.position;
-        transform.Translate(dir.normalized * enemyScr.speed * Time.deltaTime);
+        Vector3 dir = _target.position - transform.position;
+        transform.Translate(dir.normalized * _enemyScr.speed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, target.position) <= 0.2f)
+        if (Vector3.Distance(transform.position, _target.position) <= 0.2f)
         {
             GetNextWaypoint();
         }
@@ -30,12 +30,12 @@ public class EnemyMovement : MonoBehaviour
 
     void GetNextWaypoint()
     {
-        if (wavepointIndex >= Waypoints.points.Length - 1)
+        if (_wavepointIndex >= Waypoints.points.Length - 1)
         {
-            enemyScr.EndPath();
+            _enemyScr.EndPath();
             return;
         }
-        wavepointIndex++;
-        target = Waypoints.points[wavepointIndex];
+        _wavepointIndex++;
+        _target = Waypoints.points[_wavepointIndex];
     }
 }

@@ -2,23 +2,23 @@
 
 public class TowerProjectileScr : MonoBehaviour
 {
-    private Transform target; //Таргет врага
-    public Color color; //Цвет снаряда
-    public int damage; //Урон снаряда
-    public float speed;//Скорость снаряда
-    public float explosionRadius = 0f; //Если больше 0, снаряд становиться взрывным и наносит в радиусе урон соседним врагам
-    public bool slowPotion = false;//Замедлят?
-    public float durationSlow = 2f;//Длительность замедления
-    public float slowValue = 4f;//Замедление
+    private Transform _target; //Enemy target
+    public Color color; //Color projectile
+    public int damage; //Damage projectile
+    public float speed;//Speed projectile
+    public float explosionRadius = 0f; //If > 0, projectile = explosion
+    public bool slowPotion = false;//Slow?
+    public float durationSlow = 2f;
+    public float slowValue = 4f;
 
-    public GameObject impactEffect; //Эффект для попадания
+    public GameObject impactEffect;
 
     private EnemyScr enemy;
 
     private void Start()
     {
         GetComponent<SpriteRenderer>().color = color;
-        enemy = target.GetComponent<EnemyScr>();
+        enemy = _target.GetComponent<EnemyScr>();
     }
 
     private void Update()
@@ -28,13 +28,13 @@ public class TowerProjectileScr : MonoBehaviour
 
     private void Move()
     {
-        if (target == null)
+        if (_target == null)
         {
             Destroy(gameObject);
             return;
         }
 
-        Vector3 dir = target.position - transform.position;
+        Vector3 dir = _target.position - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;
         if (dir.magnitude <= distanceThisFrame)
         {
@@ -56,7 +56,7 @@ public class TowerProjectileScr : MonoBehaviour
         }
         else
         {
-            Damage(target);
+            Damage(_target);
             if (slowPotion)
             {
                 enemy.StartSlow(durationSlow,slowValue);
@@ -67,7 +67,7 @@ public class TowerProjectileScr : MonoBehaviour
     }
     public void SetTarget(Transform enemy)
     {
-        target = enemy;
+        _target = enemy;
     }
 
     void Explode()

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Waypoints : MonoBehaviour
 {
-    public static Transform[] points; //Массив вейпоинтов
+    public static Transform[] points; //Array waypoints
 
     private void Awake()
     {

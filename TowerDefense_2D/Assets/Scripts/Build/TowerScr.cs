@@ -3,15 +3,15 @@
 public class TowerScr : MonoBehaviour
 {
     [Header("Use default")]
-    public GameObject projectile; //Снаряд для вышки
-    private float fireCountdown = 0f; //Переменная для перезарядки
-    public float range; //Дальность вышки
-    public float fireRate; //Частотать стрельбы
-    public Transform shootPoint; //точка спавна снаряда
-    public Transform target; //таргет врага
-    private string enemyTag = "Enemy"; //Тег врага
+    public GameObject projectile; //For tower
+    private float _fireCountdown = 0f; //Refresh
+    public float range;
+    public float fireRate;
+    public Transform shootPoint;
+    public Transform target; //Enemy target
+    private string _enemyTag = "Enemy"; //Tag enemy
 
-    [Header("Use Laser")] //если вышка лазерная
+    [Header("Use Laser")] // if laser tower
     public bool useLaser = false;
     public int damageOverTime = 30;
     public LineRenderer lineRenderer;
@@ -46,13 +46,13 @@ public class TowerScr : MonoBehaviour
         }
         else
         {
-            if (fireCountdown <= 0)
+            if (_fireCountdown <= 0)
             {
                 Shoot(target);
-                // fireCountdown = 1f / fireRate;
+                // _fireCountdown = 1f / fireRate;
             }
 
-            fireCountdown -= Time.deltaTime;
+            _fireCountdown -= Time.deltaTime;
         }
     }
 
@@ -84,7 +84,7 @@ public class TowerScr : MonoBehaviour
     }
     void SearchTarget()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag(_enemyTag);
         float shoreterstDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
 
@@ -116,7 +116,7 @@ public class TowerScr : MonoBehaviour
 
     void Shoot(Transform enemy)
     {
-        fireCountdown = fireRate;
+        _fireCountdown = fireRate;
         GameObject proj = Instantiate(projectile);
         proj.transform.position = shootPoint.transform.position;
         proj.GetComponent<TowerProjectileScr>().SetTarget(enemy);

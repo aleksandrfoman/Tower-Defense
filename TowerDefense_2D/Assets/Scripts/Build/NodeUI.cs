@@ -3,18 +3,18 @@ using UnityEngine.UI;
 
 public class NodeUI : MonoBehaviour
 {
-    public GameObject ui;//Канвас UI вышки
-    private Node target;//Какая вышка выбрана
-    public Button upgrButton; //Кнопка апа
-    public Text upgradeCost; //Цена  апа
-    public Text sellAmount; //Цена продажи
+    public GameObject ui;//Canvas UI tower
+    private Node _target;//Tower select
+    public Button upgrButton; //Button up
+    public Text upgradeCost; //Cost up
+    public Text sellAmount;
     public void SetTarget(Node _target)
     {
-        this.target = _target;
-        transform.position = target.GetBuildPosition();
-        if (!target.isUpgraded)
+        this._target = _target;
+        transform.position = this._target.GetBuildPosition();
+        if (!this._target.isUpgraded)
         {
-            upgradeCost.text = "UP $ " + target.towerBlueprint.upgradeCost.ToString();
+            upgradeCost.text = "UP $ " + this._target.towerBlueprint.upgradeCost.ToString();
             upgrButton.interactable = true;
         }
         else
@@ -24,14 +24,14 @@ public class NodeUI : MonoBehaviour
 
         }
 
-        sellAmount.text = "Sell $ " + target.towerBlueprint.GetSellAmount();
+        sellAmount.text = "Sell $ " + this._target.towerBlueprint.GetSellAmount();
 
         ui.SetActive(true);
     }
 
     public void Sell()
     {
-        target.SellTower();
+        _target.SellTower();
         BuildManager.instance.DeselectNode();
     }
 
@@ -42,7 +42,7 @@ public class NodeUI : MonoBehaviour
 
     public void Upgrade()
     {
-        target.UpgradeTower();
+        _target.UpgradeTower();
         BuildManager.instance.DeselectNode();
     }
 }

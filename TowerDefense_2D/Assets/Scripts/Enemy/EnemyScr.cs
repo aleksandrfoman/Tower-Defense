@@ -7,10 +7,10 @@ using UnityEngine.UI;
 
 public class EnemyScr : MonoBehaviour
 {
-    public float health = 100; //Здоровье врага
-    private float maxHealth = 100; //Максимальное здороье для бара
-    public int valueMoney = 50; //Сколько платят за врага
-    public Image HealthBar; //Полоса здоровья
+    public float health = 100; //Enemy
+    public float maxHealth = 100;
+    public int valueMoney = 50; //For enemy
+    public Image HealthBar;
     [Header("HideInInspector")]
     public float speed;
     public float startSpeed = 5f;

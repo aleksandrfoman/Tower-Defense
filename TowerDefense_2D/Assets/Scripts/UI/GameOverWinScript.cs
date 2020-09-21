@@ -6,44 +6,28 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameOverWinScript : MonoBehaviour
+public class GameOverWinScript
 {
     private Button _retryButton;
     private Button _menuButton;
     private Text _gameOverText;
-    private Text _roundsText;
-
-    private void Awake()
+    private GameObject _gameOverUiGameObject;
+    public void Init()
     {
-
-        _retryButton = GameObject.Find("Retry").GetComponent<Button>();
-        _menuButton = GameObject.Find("Menu").GetComponent<Button>();
-        _gameOverText = GameObject.Find("GameOverText").GetComponent<Text>();
-        _roundsText = GameObject.Find("Rounds").GetComponent<Text>();
-
+        _gameOverUiGameObject = GameObject.Find("UIGameOver");
+        _retryButton = _gameOverUiGameObject.transform.Find("Retry").GetComponent<Button>();
+        _menuButton = _gameOverUiGameObject.transform.Find("Menu").GetComponent<Button>();
+        _gameOverText = _gameOverUiGameObject.transform.Find("GameOverText").GetComponent<Text>();
         _retryButton.onClick.AddListener(RetryGameOver);
         _menuButton.onClick.AddListener(MenuGameOver);
-    }
-
-    private void OnEnable()
-    {
-        StartCoroutine(AnimateText());
+        _gameOverUiGameObject.SetActive(false);
     }
 
     public void EndGame(bool value)
     {
-        gameObject.SetActive(true);
-        if (value)
-       {
-           Debug.Log(value+"gover");
-           PlayerStats.isGameOver = true;
-           _gameOverText.text = "GAME OVER";
-       }
-        else
-       {
-           PlayerStats.isGameOver = true;
-           _gameOverText.text = "WIN GAME";
-       }
+        _gameOverUiGameObject.SetActive(true);
+        _gameOverText.text = value ? "GAME OVER" : "WIN GAME";
+        PlayerStats.isGameOver = true;
     }
 
     public void RetryGameOver()
@@ -55,20 +39,5 @@ public class GameOverWinScript : MonoBehaviour
     public void MenuGameOver()
     {
         SceneManager.LoadScene("MainMenu");
-    }
-
-    IEnumerator AnimateText()
-    {
-        _roundsText.text = "0";
-        int round = 0;
-        yield return new WaitForSeconds(.7f);
-
-        while (round < PlayerStats.Rounds)
-        {
-            round++;
-            _roundsText.text = round.ToString();
-
-            yield return new WaitForSeconds(.05f);
-        }
     }
 }

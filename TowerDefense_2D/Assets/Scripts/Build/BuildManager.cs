@@ -2,58 +2,57 @@
 
 public class BuildManager : MonoBehaviour
 {
-    //Сингелтон для строительства
     public static BuildManager instance;
 
     private void Awake()
     {
         if (instance != null)
         {
-            Debug.Log("Больше одного билд менеджера в сцене");
+            Debug.Log("More one build manager");
         }
         instance = this;
     }
 
-    private TowerBlueprint towerToBuild;
-    private Node selectedNode;
+    private TowerBlueprint _towerToBuild;
+    private Node _selectedNode;
     public NodeUI nodeUI;
     public bool CanBuild
     {
-        get { return towerToBuild != null; }
+        get { return _towerToBuild != null; }
     }
     public bool HasMoney
     {
-        get { return PlayerStats.Money>=towerToBuild.cost; }
+        get { return PlayerStats.Money>=_towerToBuild.cost; }
     }
 
     public void SelecetNode(Node node)
     {
-        if (selectedNode == node)
+        if (_selectedNode == node)
         {
             DeselectNode();
             return;
         }
-        selectedNode = node;
-        towerToBuild = null;
+        _selectedNode = node;
+        _towerToBuild = null;
 
         nodeUI.SetTarget(node);
     }
 
     public void DeselectNode()
     {
-        selectedNode = null;
+        _selectedNode = null;
         nodeUI.Hide();
     }
 
     public void SelectTowerToBuild(TowerBlueprint tower)
     {
-        towerToBuild = tower;
+        _towerToBuild = tower;
         DeselectNode();
     }
 
     public TowerBlueprint GetTowerToBuild()
     {
-        return towerToBuild;
+        return _towerToBuild;
 
     }
 }

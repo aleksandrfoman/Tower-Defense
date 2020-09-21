@@ -24,45 +24,45 @@ public class GameMenuScript : MonoBehaviour
     public GameObject shopButtonPref;
 
     private Transform _shopTransform;
-    public GameObject _pauseMenu;
-    public GameOverWinScript _gameOverMenu;
-    public PauseMenuScript pms;
     private Button _pauseButton;
+
+    //UI Section
+    private GameOverWinScript _gameOverWinScript;
+    private PauseMenuScript _pauseMenuScript;
 
     private void Awake()
     {
+        _gameOverWinScript = new GameOverWinScript();
+        _pauseMenuScript = new PauseMenuScript();
 
-        _pauseMenu = GameObject.Find("PauseMenu");
-         pms = _pauseMenu.GetComponentInChildren<PauseMenuScript>();
-         pms.gameObject.SetActive(false);
-         _pauseButton = GameObject.Find("PauseButton").GetComponent<Button>();
-         _gameOverMenu = GameObject.Find("GameOver/WinGame").GetComponentInChildren<GameOverWinScript>();
-         _gameOverMenu.gameObject.SetActive(false);
+        Init();
+        _gameOverWinScript.Init();
+        _pauseMenuScript.Init();
+
+        CreateBluePrint();
+        CreateButtonShop();
 
     }
 
-    private void Pause()
+    private void Init()
     {
-        pms.Toggle();
-    }
-
-    private void Start()
-    {
-        _pauseButton.GetComponent<Image>().color = Color.yellow;
-        _pauseButton.onClick.AddListener(Pause);
-
+        //_pauseMenuScript = GameObject.Find("PauseMenu");
+        //_pauseMenuScript = _pauseMenu.GetComponentInChildren<PauseMenuScript>();
+        //_pauseButton = _pauseMenu.transform.Find("PauseButton").GetComponent<Button>();
+        //_pauseButton.GetComponent<Image>().color = Color.yellow;
+        //_pauseButton.onClick.AddListener(Pause);
         _buildManager = BuildManager.instance;
-
         _waveSpawner = (WaveSpawner)FindObjectOfType(typeof(WaveSpawner));
         _waveTimerText = GameObject.Find("WaveTimerText").GetComponent<Text>();
         _moneyText = GameObject.Find("MoneyText").GetComponent<Text>();
         _livesText = GameObject.Find("LivesText").GetComponent<Text>();
         _shopTransform = GameObject.Find("UIShop").GetComponent<Transform>();
-
-        CreateBluePrint();
-        CreateButtonShop();
     }
 
+    private void Pause()
+    {
+        _pauseMenuScript.Toggle();
+    }
     private void Update()
     {
         _waveSpawner.countdown = Mathf.Clamp(_waveSpawner.countdown, 0f, Mathf.Infinity);
@@ -91,27 +91,18 @@ public class GameMenuScript : MonoBehaviour
 
     public void CreateButtonShop()
     {
+        GameObject shopItemButton;
         for (int i = 0; i < _towersList.Count; i++)
         {
-            GameObject gObj = Instantiate(shopButtonPref);
+            shopItemButton = Instantiate(shopButtonPref);
 
+            shopItemButton.transform.Find("ShopTowerItemText").GetComponent<Text>().text = _towersList[i].nameTower;
+            //shopItemButton.transform.Find("CostText").GetComponent<Text>().text = "$ " + _towersList[i].cost.ToString();
 
-            gObj.transform.SetParent(_shopTransform);
-            Text[] shopTexts = gObj.GetComponentsInChildren<Text>();
-            foreach (var text in shopTexts)
-            {
-                if (text.name == "ShopTowerItemText")
-                {
-                    text.text = _towersList[i].nameTower;
-                }
-                else if (text.name == "CostText")
-                {
-                    text.text ="$ "+ _towersList[i].cost.ToString();
-                }
-            }
-            //Чтобы не было замыкания цыкла
             var selectTowerIndex = i;
-            gObj.GetComponent<Button>().onClick.AddListener(delegate {SelectTower(selectTowerIndex);});
+            shopItemButton.GetComponent<Button>().onClick.AddListener(delegate { SelectTower(selectTowerIndex); });
+
+            shopItemButton.transform.SetParent(_shopTransform);
         }
     }
     public void SelectTower(int value)
@@ -122,6 +113,6 @@ public class GameMenuScript : MonoBehaviour
 
     public void CheckGame(bool value)
     {
-        _gameOverMenu.EndGame(value);
+        _gameOverWinScript.EndGame(value);
     }
 }
