@@ -17,6 +17,8 @@ public class NodeUI
         _upgrCost = _upgrButton.transform.Find("TextUpgrade").GetComponent<Text>();
         _sellButton = GameObject.Find("SellButton").GetComponent<Button>();
         _sellAmount = _sellButton.transform.Find("TextSell").GetComponent<Text>();
+        _upgrButton.onClick.AddListener(Upgrade);
+        _sellButton.onClick.AddListener(Sell);
         Hide();
     }
     public void SetTarget(Node _target)
