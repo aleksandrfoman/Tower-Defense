@@ -8,7 +8,6 @@ public class MainMenuScript
 {
     private Button _playButton;
     private Button _quitButton;
-    private string _levelToLoad = "LevelSelect";
     public GameObject mainMenuGamObj;
     private Main _main;
 
