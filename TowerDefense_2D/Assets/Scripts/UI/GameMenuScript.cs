@@ -30,33 +30,32 @@ public class GameMenuScript : MonoBehaviour
     private GameOverWinScript _gameOverWinScript;
     private PauseMenuScript _pauseMenuScript;
 
-    private void Awake()
+    private void Start()
     {
+
         _gameOverWinScript = new GameOverWinScript();
         _pauseMenuScript = new PauseMenuScript();
 
         Init();
+
         _gameOverWinScript.Init();
         _pauseMenuScript.Init();
-
-        CreateBluePrint();
-        CreateButtonShop();
-
     }
 
     private void Init()
     {
-        //_pauseMenuScript = GameObject.Find("PauseMenu");
-        //_pauseMenuScript = _pauseMenu.GetComponentInChildren<PauseMenuScript>();
-        //_pauseButton = _pauseMenu.transform.Find("PauseButton").GetComponent<Button>();
-        //_pauseButton.GetComponent<Image>().color = Color.yellow;
-        //_pauseButton.onClick.AddListener(Pause);
         _buildManager = BuildManager.instance;
+        _pauseButton = GameObject.Find("PauseButton").GetComponent<Button>();
+        _pauseButton.onClick.AddListener(Pause);
+
         _waveSpawner = (WaveSpawner)FindObjectOfType(typeof(WaveSpawner));
         _waveTimerText = GameObject.Find("WaveTimerText").GetComponent<Text>();
         _moneyText = GameObject.Find("MoneyText").GetComponent<Text>();
         _livesText = GameObject.Find("LivesText").GetComponent<Text>();
         _shopTransform = GameObject.Find("UIShop").GetComponent<Transform>();
+
+        CreateBluePrint();
+        CreateButtonShop();
     }
 
     private void Pause()
@@ -92,22 +91,21 @@ public class GameMenuScript : MonoBehaviour
     public void CreateButtonShop()
     {
         GameObject shopItemButton;
+
         for (int i = 0; i < _towersList.Count; i++)
         {
             shopItemButton = Instantiate(shopButtonPref);
 
             shopItemButton.transform.Find("ShopTowerItemText").GetComponent<Text>().text = _towersList[i].nameTower;
-            //shopItemButton.transform.Find("CostText").GetComponent<Text>().text = "$ " + _towersList[i].cost.ToString();
+            shopItemButton.transform.Find("costBG").transform.Find("CostText").GetComponent<Text>().text = "$ " + _towersList[i].cost.ToString();
 
             var selectTowerIndex = i;
-            shopItemButton.GetComponent<Button>().onClick.AddListener(delegate { SelectTower(selectTowerIndex); });
-
+            shopItemButton.GetComponent<Button>().onClick.AddListener(delegate{SelectTower(selectTowerIndex);});
             shopItemButton.transform.SetParent(_shopTransform);
         }
     }
     public void SelectTower(int value)
     {
-
         _buildManager.SelectTowerToBuild(_towersList[value]);
     }
 

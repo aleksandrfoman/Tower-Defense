@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PauseMenuScript : MonoBehaviour
+public class PauseMenuScript
 {
     private Button _refreshButton;
     private Button _menuButton;
@@ -14,9 +14,10 @@ public class PauseMenuScript : MonoBehaviour
     public void Init()
     {
         _pauseMenu = GameObject.Find("UIPauseMenu");
-        _continueButton = _pauseMenu.transform.Find("ContinuePause").GetComponent<Button>();
-        _refreshButton = _pauseMenu.transform.Find("RetryPause").GetComponent<Button>();
-        _menuButton = _pauseMenu.transform.Find("MenuPause").GetComponent<Button>();
+        _continueButton = GameObject.Find("ContinuePause").GetComponent<Button>();
+        _refreshButton = GameObject.Find("RetryPause").GetComponent<Button>();
+        _menuButton = GameObject.Find("MenuPause").GetComponent<Button>();
+
         _continueButton.onClick.AddListener(Toggle);
         _menuButton.onClick.AddListener(Menu);
         _refreshButton.onClick.AddListener(Retry);
@@ -25,14 +26,14 @@ public class PauseMenuScript : MonoBehaviour
 
     public void Toggle()
     {
-        if (!gameObject.activeSelf)
+        if (!_pauseMenu.activeSelf)
         {
-            gameObject.SetActive(true);
+            _pauseMenu.SetActive(true);
             Time.timeScale = 0f;
         }
         else
         {
-            gameObject.SetActive(false);
+            _pauseMenu.SetActive(false);
             Time.timeScale = 1f;
         }
     }

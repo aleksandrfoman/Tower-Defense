@@ -8,6 +8,7 @@ public class BuildManager : MonoBehaviour
     {
         if (instance != null)
         {
+            Destroy(this);
             Debug.Log("More one build manager");
         }
         instance = this;
