@@ -132,6 +132,7 @@ MonoBehaviour:
     cost: 0
     upgradePrefab: {fileID: 0}
     upgradeCost: 0
+    nameTower: 
   isUpgraded: 0
   impactEffect: {fileID: 2296798751896578195, guid: 424a4918d2f14e745a71a059ff4a2f97, type: 3}
   notificationTexts:
