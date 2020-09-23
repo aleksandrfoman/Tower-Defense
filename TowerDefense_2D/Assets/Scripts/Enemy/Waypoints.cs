@@ -3,16 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Waypoints : MonoBehaviour
+public class Waypoints
 {
     public static Transform[] points; //Array waypoints
-
-    private void Awake()
+    private GameObject _waypoints;
+    public void Init()
     {
-        points = new Transform[transform.childCount];
+        _waypoints = GameObject.Find("WayPoints");
+
+        points = new Transform[_waypoints.transform.childCount];
         for (int i = 0; i < points.Length; i++)
         {
-            points[i] = transform.GetChild(i);
+            points[i] = _waypoints.transform.GetChild(i);
         }
     }
 }

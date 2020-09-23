@@ -25,7 +25,7 @@ public class Main : MonoBehaviour
         if (instance != null)
         {
             Destroy(this);
-            Debug.Log("More one build manager");
+            Debug.Log("More one Main manager");
         }
         instance = this;
     }

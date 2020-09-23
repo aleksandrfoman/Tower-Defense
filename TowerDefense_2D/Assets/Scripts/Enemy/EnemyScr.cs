@@ -14,6 +14,8 @@ public class EnemyScr : MonoBehaviour
     [Header("HideInInspector")]
     public float speed;
     public float startSpeed = 5f;
+
+
     private void Start()
     {
         speed = startSpeed;
