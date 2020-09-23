@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
-public class PlayerStats : MonoBehaviour
+public class PlayerStats
 {
     public static int Money; // Game money
     public int startMoney = 400;
@@ -10,7 +10,7 @@ public class PlayerStats : MonoBehaviour
 
     public static int Rounds;
     public static bool isGameOver = false;
-    private void Start()
+    public void Init()
     {
         Lives = startLives;
         Money = startMoney;

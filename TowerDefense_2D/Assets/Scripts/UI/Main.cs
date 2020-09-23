@@ -15,7 +15,6 @@ public class Main : MonoBehaviour
     private GameState currentState;
     private MainMenuScript _mainMenuScript;
     private LevelSelectorScript _levelSelectorScript;
-
     public static Main instance;
 
 
@@ -34,23 +33,18 @@ public class Main : MonoBehaviour
     {
         _mainMenuScript = new MainMenuScript();
         _levelSelectorScript = new LevelSelectorScript();
-
         _mainMenuScript.Init();
         _levelSelectorScript.Init();
-
         ChangeState(GameState.MainMenu);
     }
-
     public void ChangeState(GameState newState)
     {
         switch (currentState)
         {
             case GameState.MainMenu:
                 _mainMenuScript.Hide();
-                //Вылючаем
                 break;
             case GameState.Game:
-
                 break;
             case GameState.LevelSelect:
                 _levelSelectorScript.Hide();
@@ -63,7 +57,6 @@ public class Main : MonoBehaviour
         {
             case GameState.MainMenu:
                 _mainMenuScript.Show();
-                //Включаем
                 break;
             case GameState.Game:
                 break;
@@ -71,6 +64,5 @@ public class Main : MonoBehaviour
                 _levelSelectorScript.Show();
                 break;
         }
-
     }
 }
